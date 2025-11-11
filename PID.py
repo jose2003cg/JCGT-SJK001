@@ -5,7 +5,7 @@ import cv2
 
 KP = 0.0105
 KD = 0.0085
-KI = 0.000001  
+KI = 0.000001  # valor inicial, se ajusta según comportamiento
 V_MAX = 8.8
 V_MIN = 3.20
 IMG_CENTER = 320
@@ -38,7 +38,8 @@ while True:
             HAL.setV(v_dyn)
             HAL.setW(w_dyn)
 
-            last_err = err  
+            last_err = err  # actualizar error anterior
+        else:
             HAL.setV(0)
             HAL.setW(0)
     else:
