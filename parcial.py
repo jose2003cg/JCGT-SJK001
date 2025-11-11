@@ -8,7 +8,6 @@ V_MAX = 9.35
 V_MIN = 3.25
 IMG_CENTER = 320
 
-i = 0
 while True:
     img = HAL.getImage()
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -41,5 +40,3 @@ while True:
         HAL.setW(0)
         
     WebGUI.showImage(img)
-    print(i)
-    i+=1
