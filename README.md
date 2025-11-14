@@ -1,5 +1,6 @@
-# JCGT-SJK001
-This repo will contain all the code and info related to the laboratory fort the subject SJK001
+<details>
+
+<summary> JCGT-SJK001 This repo will contain all the code and info related to the laboratory fort the subject SJK001 </summary>
 
 # ¿Qué es follow line en robótica?
 
@@ -55,6 +56,7 @@ Dentro del código del controlador proporcional, tenemos la variable KP,V_MAX y 
 - **w_dyn** = KP * err(Si el error es grande giro grande, si no suave, y si es 0 sigue recto)
 - **v_dyn** = V_MAX - ((abs(err) / IMG_CENTER) * (V_MAX - V_MIN)) (Cuanto mayor sea el error menor será la velocidad)
 del circuito.
+- **err**: cuánto se desvía la línea del centro de la imagen,y hacia qué lado.
 
 
 
@@ -82,7 +84,7 @@ A parte de las variables previas, destacan:
 
 
 
-# Control PID(./PID.py)
+# [Control PID](./PID.py)
 
 Este programa es la versión más avanzada de los anteriores. Incorpora un control PID, que combina tres términos, los dos anteriores y el Integral:
 
@@ -94,6 +96,51 @@ Respecto a las variables:
   - **integral += err** : Suma acumulativa del error, corrige errores persistenes que el término proporcional por sí solo no puede
   - **w_dyn** = KP * err + KD * derivative + KI * integral
   -  - **KI * integral**: corrige desvíos sostenidos a largo plazo.
+
+
+
+
+# Despegar Proyecto
+
+### 1. Descargar la imagen
+
+Primero, obtén la última imagen de Docker Hub:
+
+> ```bash
+> docker pull jderobot/robotics-backend:latest 
+> ```
+
+### 2. Lanzar el contenedor
+
+Lanzar el contenedor
+
+Opción A: Sin aceleración gráfica
+
+Esta es la opción recomendada si no necesitas aceleración gráfica o no estás seguro
+> ```bash
+>docker run --rm -it \-p 6080-6090:6080-6090 -p 7163:7163 \jderobot/robotics-backend:latest 
+> ```
+
+Opción B: Con aceleración gráfica (genérica)
+
+Usa esta opción si tienes drivers gráficos (como Intel o AMD) y quieres habilitar la aceleración.
+
+> ```bash
+> docker run --rm -it --device /dev/dri \-p 6080-6090:6080-6090 -p 7163:7163 \jderobot/robotics-backend:latest 
+> ```
+
+Opción C: Con aceleración gráfica (NVIDIA)
+Usa esta opción específica si tienes una tarjeta gráfica NVIDIA y los drivers correspondientes instalados.
+> ```bash
+> docker run --rm -it --device /dev/dri --gpus all \-p 6080-6090:6080-6090 -p 7163:7163 \jderobot/robotics-backend:latest 
+> ```
+
+
+Una vez arrancado el contenedor, inicias sesión o te registras en unibotics, accedes a follow line, y eliges el universo correspondiente, en nuestro caso, el simple
+
+## ✍️ Autor
+* **Jose Cristian Georgescu** - *Trabajo Inicial* - [josecristian](https://github.com/jose2003cg)
+</details>
 
 
 
