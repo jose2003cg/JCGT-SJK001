@@ -28,7 +28,7 @@ La vista del entorno desde la cámara del robot, que muestra cómo la línea es 
 <img width="378" height="382" alt="imagen" src="https://github.com/user-attachments/assets/367e7856-0e97-4ae2-9626-b90713ea99c8" />
 
 
-# Control proporcional para el seguimiento de línea
+# [Control proporcional para el seguimiento de línea](./PD.py)
 
 Para que un robot sea capaz de seguir una línea de forma autónoma, no basta con detectar la posición de esa línea en la imagen: también necesita una forma de corregir su movimiento de manera continua y suave.
 Aquí es donde entra en juego el control proporcional (P-control), una técnica sencilla pero muy efectiva en robótica móvil.
@@ -50,10 +50,10 @@ Este comportamiento hace posible que el robot siga el recorrido de forma estable
 
 Dentro del código del controlador proporcional, tenemos la variable KP,V_MAX y V_MIN a destacar
 
-- KP: constante proporcional que define cuánto gira el robot por cada pixel de error.
-- V_MAX / V_MIN: límites de la velocidad lineal.
-- w_dyn = KP * err(Si el error es grande giro grande, si no suave, y si es 0 sigue recto)
-- v_dyn = V_MAX - ((abs(err) / IMG_CENTER) * (V_MAX - V_MIN)) (Cuanto mayor sea el error menor será la velocidad)
+- **KP**: constante proporcional que define cuánto gira el robot por cada pixel de error.
+- **V_MAX / V_MIN**: límites de la velocidad lineal.
+- **w_dyn** = KP * err(Si el error es grande giro grande, si no suave, y si es 0 sigue recto)
+- **v_dyn** = V_MAX - ((abs(err) / IMG_CENTER) * (V_MAX - V_MIN)) (Cuanto mayor sea el error menor será la velocidad)
 del circuito.
 
 
