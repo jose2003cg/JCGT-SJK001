@@ -82,10 +82,18 @@ A parte de las variables previas, destacan:
 
 
 
+# Control PID(./PID.py)
 
+Este programa es la versión más avanzada de los anteriores. Incorpora un control PID, que combina tres términos, los dos anteriores y el Integral:
 
+Integral (I): corrige errores acumulados a lo largo del tiempo (ayuda en situaciones donde la línea tiende a desviarse ligeramente de manera constante).
 
-
+Respecto a las variables:
+  -**KI**: ganancia integral, corrige desviaciones acumuladas.
+  -**integral**: acumula el error a lo largo del tiempo para el término integral.
+  - **integral += err** : Suma acumulativa del error, corrige errores persistenes que el término proporcional por sí solo no puede
+  - **w_dyn** = KP * err + KD * derivative + KI * integral
+  -  - **KI * integral**: corrige desvíos sostenidos a largo plazo.
 
 
 
