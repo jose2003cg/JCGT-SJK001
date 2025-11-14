@@ -38,10 +38,22 @@ Cuanto más desviada esté la línea, mayor será la corrección; y cuanto más 
 
 Con este método, el robot:
 
-gira más fuerte cuando la línea está lejos del centro,
+- gira más fuerte cuando la línea está lejos del centro,
 
-gira suavemente cuando la línea está cerca,
+- gira suavemente cuando la línea está cerca,
 
-y avanza recto cuando la línea está alineada.
+ -avanza recto cuando la línea está alineada.
 
-Este comportamiento hace posible que el robot siga el recorrido de forma estable, reactiva y continua, adaptándose en tiempo real a curvas, cambios de dirección y pequeñas imperfecciones del circuito.
+Este comportamiento hace posible que el robot siga el recorrido de forma estable, reactiva y continua, adaptándose en tiempo real a curvas, cambios de dirección y pequeñas imperfecciones
+
+
+
+Dentro del código del controlador proporcional, tenemos la variable KP,V_MAX y V_MIN a destacar
+
+- KP: constante proporcional que define cuánto gira el robot por cada pixel de error.
+- V_MAX / V_MIN: límites de la velocidad lineal.
+- w_dyn = KP * err(Si el error es grande giro grande, si no suave, y si es 0 sigue recto)
+- v_dyn = V_MAX - ((abs(err) / IMG_CENTER) * (V_MAX - V_MIN)) (Cuanto mayor sea el error menor será la velocidad)
+del circuito.
+
+
