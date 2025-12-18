@@ -148,6 +148,40 @@ Una vez arrancado el contenedor, inicias sesión o te registras en unibotics, ac
 
 
   <summary>  Segundo lab</summary>
+  
+  # Rescue People Challenge - Unibotics
+
+  
+  <img width="500" height="200" alt="imagen" src="https://github.com/user-attachments/assets/ea65f01b-f0d2-4498-a5e3-6872fb740db0" />
+
+![Python](https://img.shields.io/badge/Python-3.8-blue)
+![Unibotics](https://img.shields.io/badge/Platform-Unibotics-green)
+![OpenCV](https://img.shields.io/badge/Library-OpenCV-red)
+
+## Descripción
+Este proyecto contiene la solución para el reto **"Rescue People"** de la plataforma Unibotics. El objetivo es programar un dron autónomo capaz de patrullar una zona de marítima, localizar a las víctimas mediante visión artificial y reportar su ubicación antes de regresar a la base.
+
+La solución implementa una estrategia de búsqueda en espiral y un sistema de visión robusto ante la rotación de la cámara.
+
+## 🎯 Objetivos del Reto
+1. **Despegue y Posicionamiento:** Elevar el dron y dirigirse al centro de la zona de búsqueda.
+2. **Patrullaje Autónomo:** Barrer el área de forma eficiente para no dejar zonas sin revisar.
+3. **Detección de Víctimas:** Identificar rostros humanos en el agua usando la cámara ventral.
+4. **Geolocalización:** Guardar las coordenadas de cada víctima (evitando duplicados).
+5. **Retorno a Casa:** Volver al punto de despegue (0,0) y aterrizar tras completar la misión.
+
+## ⚙️ Estrategia de Solución
+
+### 1. Máquina de Estados (FSM)
+El comportamiento del dron se gestiona mediante una máquina de estados finitos para asegurar un flujo lógico:
+
+| Estado | Descripción |
+| :--- | :--- |
+| `TAKEOFF` | El dron despega hasta alcanzar una altura de seguridad (4m). |
+| `MOVE_TO_CENTER` | Desplazamiento rápido hacia el centro del área de búsqueda. |
+| `SEARCH` | Ejecución del algoritmo de espiral y detección activa de visión. |
+| `RETURN_HOME` | Al encontrar todas las víctimas, el dron regresa al origen. |
+| `LAND` | Aterrizaje controlado y reporte final. |
 
   
   
