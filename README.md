@@ -1,6 +1,6 @@
 <details>
 
-<summary> JCGT-SJK001 This repo will contain all the code and info related to the laboratory fort the subject SJK001 </summary>
+<summary> Primer lab </summary>
 
 # ¿Qué es follow line en robótica?
 
@@ -143,6 +143,15 @@ Una vez arrancado el contenedor, inicias sesión o te registras en unibotics, ac
 </details>
 
 
+
+<details>
+
+
+  <summary>  Segundo lab</summary>
+
+  
+  
+</details>
 
 
 
