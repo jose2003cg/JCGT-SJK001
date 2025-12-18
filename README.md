@@ -138,8 +138,6 @@ Usa esta opción específica si tienes una tarjeta gráfica NVIDIA y los drivers
 
 Una vez arrancado el contenedor, inicias sesión o te registras en unibotics, accedes a follow line, y eliges el universo correspondiente, en nuestro caso, el simple
 
-## ✍️ Autor
-* **Jose Cristian Georgescu** - *Trabajo Inicial* - [josecristian](https://github.com/jose2003cg)
 </details>
 
 
@@ -225,6 +223,59 @@ Solución: Implementé una función que rota la imagen capturada en memoria 360�
 Para evitar contar a la misma víctima múltiples veces mientras el drone pasa sobre ella, se calcula la distancia euclidiana. Solo se registra una nueva víctima si está a más de 2 metros de cualquier ubicación ya guardada
 > ``` python
 >is_new_victim = all(math.hypot(x_pos - vx, y_pos - vy) >= 4.0 for vx, vy in victims_locations)
+
+
+
+### Resultado
+Como se puede ver en la imagen, el dron ha aterrizado despues de haber detectado a las victimas, que en este caso han sido 6
+<img width="850" height="500" alt="lab2ro" src="https://github.com/user-attachments/assets/6213e5b2-1531-454c-9bd3-a01fd9cf11ef" />
+
+
+
+
+
+# Despegar Proyecto
+
+### 1. Descargar la imagen
+
+Primero, obtén la última imagen de Docker Hub:
+
+> ```bash
+> docker pull jderobot/robotics-backend:latest 
+> ```
+
+### 2. Lanzar el contenedor
+
+Lanzar el contenedor
+
+Opción A: Sin aceleración gráfica
+
+Esta es la opción recomendada si no necesitas aceleración gráfica o no estás seguro
+> ```bash
+>docker run --rm -it \-p 6080-6090:6080-6090 -p 7163:7163 \jderobot/robotics-backend:latest 
+> ```
+
+Opción B: Con aceleración gráfica (genérica)
+
+Usa esta opción si tienes drivers gráficos (como Intel o AMD) y quieres habilitar la aceleración.
+
+> ```bash
+> docker run --rm -it --device /dev/dri \-p 6080-6090:6080-6090 -p 7163:7163 \jderobot/robotics-backend:latest 
+> ```
+
+Opción C: Con aceleración gráfica (NVIDIA)
+Usa esta opción específica si tienes una tarjeta gráfica NVIDIA y los drivers correspondientes instalados.
+> ```bash
+> docker run --rm -it --device /dev/dri --gpus all \-p 6080-6090:6080-6090 -p 7163:7163 \jderobot/robotics-backend:latest 
+> ```
+
+
+Una vez arrancado el contenedor, inicias sesión o te registras en unibotics, accedes a follow line, y eliges el universo correspondiente, en nuestro caso, el simple
+
+## ✍️ Autor
+* **Jose Cristian Georgescu** - *Trabajo Inicial* - [josecristian](https://github.com/jose2003cg)
+
+
 </details>
 
 
