@@ -183,8 +183,48 @@ El comportamiento del dron se gestiona mediante una máquina de estados finitos 
 | `RETURN_HOME` | Al encontrar todas las víctimas, el dron regresa al origen. |
 | `LAND` | Aterrizaje controlado y reporte final. |
 
+
+
+
+### 2. Implementación Técnica y Algoritmos
+
+  #### Navegación: Espiral 
+  Para garantizar un barrido completo del océano sin repetir zonas, implementé una espiral matemática. En lugar de usar `waypoints` fijos, calculo la posición objetivo en tiempo real basándome en el ángulo acumulado.
   
-  
+  Esto convierte coordenadas polares (ángulo y radio creciente) a cartesianas (X, Y) para el dron:
+
+  > ```python
+  > # El radio crece conforme el dron da vueltas (Espiral de Arquímedes)
+  > radius_current = SPIRAL_INCREMENT * angle_accumulated
+  > """ Conversión Polar -> Cartesiana"""
+  > target_x = TARGET_X + radius_current * math.cos(angle_accumulated)
+  > target_y = TARGET_Y + radius_current * math.sin(angle_accumulated)  
+
+
+
+
+
+Uno de los mayores desafíos técnicos es que el clasificador Haar Cascade solo detecta rostros en posición vertical. Dado que el dron rota sobre su eje Z mientras se desplaza, la orientación de la víctima cambia constantemente en la cámara.
+
+Solución: Implementé una función que rota la imagen capturada en memoria 360º (en pasos de 15º) hasta encontrar una coincidencia.
+
+> ``` python
+> # Bucle de detección con rotación dinámica
+> for rotation in range(0, 360, 15):
+>    # Si es 0 grados usa la original, si no, rota la imagen
+>    check_frame = gray_frame if rotation == 0 else rotate_gray(gray_frame, rotation)
+>    
+>    # Intenta detectar caras en la imagen rotada
+>    faces_found = face_detector.detectMultiScale(check_frame, scaleFactor=1.2, minNeighbors=3)
+>   
+>    if len(faces_found) > 0:
+>        detected_face = True
+>       break # Si encuentra cara, deja de rotar para ahorrar CPU
+
+
+Para evitar contar a la misma víctima múltiples veces mientras el drone pasa sobre ella, se calcula la distancia euclidiana. Solo se registra una nueva víctima si está a más de 2 metros de cualquier ubicación ya guardada
+> ``` python
+>is_new_victim = all(math.hypot(x_pos - vx, y_pos - vy) >= 4.0 for vx, vy in victims_locations)
 </details>
 
 
